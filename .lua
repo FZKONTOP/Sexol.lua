@@ -1728,6 +1728,8 @@ for _, location in ipairs(workoutLocations) do
     locationDropdown:Add(location)
 end
 
+local InventoryTab = window:AddTab("Inventory")
+
 InventoryTab:AddLabel("Eater:").TextSize = 22
 
 local function activateProteinEgg()
@@ -1818,6 +1820,7 @@ local eatswitch = InventoryTab:AddSwitch("Eat Everything", function(state)
 end)
 eatswitch:Set(false)
 
+local TeleportTab = window:AddTab("Teleports")
 
 TeleportTab:AddLabel("Main:").TextSize = 22
 
@@ -1876,6 +1879,8 @@ TeleportTab:AddButton("Frost Gym",function()
     local hrp = char:WaitForChild("HumanoidRootPart")
     hrp.CFrame = CFrame.new(-2623, 7.36, -409)
 end)
+
+local PetsTab = window:AddTab("Pet Shop")
 
 PetsTab:AddLabel("Pets:").TextSize = 22
 
@@ -1983,6 +1988,8 @@ PetsTab:AddSwitch("Buy Aura", function(bool)
         end)
     end
 end)
+
+local StatsTab = window:AddTab("Stats")
 
 StatsTab:AddLabel(emojiMap["Time"] .. " Time:").TextSize = 22
 
