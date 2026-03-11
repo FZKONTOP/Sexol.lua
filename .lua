@@ -2058,3 +2058,122 @@ while true do
     wait(0.1)
 end
 
+local Calculadora = window:AddTab("Calculadora 2", Color3.fromRGB(200, 100, 100))
+
+local baseStrength = 0
+local resultadoLabelsDamage = {}
+
+local FolderDamage = Calculadora:AddFolder("Pack Damage Calculator")
+
+FolderDamage:AddTextBox("Base Strongth (ej: 1.27Qa, T, B)", function(text)
+    local unidades = { ["T"] = 1e12, ["Q"] = 1e15, ["B"] = 1e9 }
+    text = text:upper()
+    for u, m in pairs(unidades) do
+        if text:find(u) then
+            local num = tonumber(text:match("(%d+%.?%d*)"))
+            if num then
+                baseStrength = num * m
+                return
+            end
+        end
+    end
+    baseStrength = tonumber(text:match("(%d+%.?%d*)")) or 0
+end)
+
+local mensajeLabelDamage = FolderDamage:AddLabel("")
+
+for i = 1, 8 do
+    resultadoLabelsDamage[i] = FolderDamage:AddLabel(string.format("%d pack(s): -", i))
+end
+
+FolderDamage:AddButton("Calculate Damage", function()
+    if baseStrength <= 0 then
+        mensajeLabelDamage.Text = "Enter a valid value."
+        for i = 1, 8 do
+            resultadoLabelsDamage[i].Text = string.format("%d pack(s): -", i)
+        end
+        return
+    end
+
+    mensajeLabelDamage.Text = ""
+
+    local danoAjustado = baseStrength * 0.10
+    local incremento = 0.335
+
+    for pack = 1, 8 do
+        local mult = 1 + (pack * incremento)
+        local valor = danoAjustado * mult
+
+        local disp
+        if valor >= 1e15 then
+            disp = string.format("%.3f Qa", valor / 1e15)
+        elseif valor >= 1e12 then
+            disp = string.format("%.2f T", valor / 1e12)
+        elseif valor >= 1e9 then
+            disp = string.format("%.2f B", valor / 1e9)
+        else
+            disp = tostring(math.floor(valor))
+        end
+
+        resultadoLabelsDamage[pack].Text = string.format("%d pack(s): %s", pack, disp)
+    end
+end)
+
+local baseDurabilidad = 0
+local resultadoLabelsDurabilidad = {}
+
+local FolderDurabilidad = Calculadora:AddFolder("Pack Durability Calculator")
+
+FolderDurabilidad:AddTextBox("Base durability (ej: 1.27Qa, T, B)", function(text)
+    local unidades = { ["T"] = 1e12, ["Q"] = 1e15, ["B"] = 1e9 }
+    text = text:upper()
+    for u, m in pairs(unidades) do
+        if text:find(u) then
+            local num = tonumber(text:match("(%d+%.?%d*)"))
+            if num then
+                baseDurabilidad = num * m
+                return
+            end
+        end
+    end
+    baseDurabilidad = tonumber(text:match("(%d+%.?%d*)")) or 0
+end)
+
+local mensajeLabelDurabilidad = FolderDurabilidad:AddLabel("")
+
+for i = 1, 8 do
+    resultadoLabelsDurabilidad[i] = FolderDurabilidad:AddLabel(string.format("%d pack(s): -", i))
+end
+
+FolderDurabilidad:AddButton("Calculate Durability", function()
+    if baseDurabilidad <= 0 then
+        mensajeLabelDurabilidad.Text = "Enter a valid value."
+        for i = 1, 8 do
+            resultadoLabelsDurabilidad[i].Text = string.format("%d pack(s): -", i)
+        end
+        return
+    end
+
+    mensajeLabelDurabilidad.Text = ""
+
+    local incremento = 0.335
+    local adicional = 1.5
+
+    for pack = 1, 8 do
+        local mult = 1 + (pack * incremento)
+        local valor = baseDurabilidad * mult * adicional
+
+        local disp
+        if valor >= 1e15 then
+            disp = string.format("%.3f Qa", valor / 1e15)
+        elseif valor >= 1e12 then
+            disp = string.format("%.2f T", valor / 1e12)
+        elseif valor >= 1e9 then
+            disp = string.format("%.2f B", valor / 1e9)
+        else
+            disp = tostring(math.floor(valor))
+        end
+
+        resultadoLabelsDurabilidad[pack].Text = string.format("%d pack(s): %s", pack, disp)
+    end
+end)
