@@ -17,7 +17,7 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lkjhg
 
 local window = library:AddWindow("Silence | Main", {
     main_color = Color3.fromRGB(138, 0, 0),
-    min_size = Vector2.new(600, 630),
+    min_size = Vector2.new(1200, 630),
     can_resize = false,
 })
 
