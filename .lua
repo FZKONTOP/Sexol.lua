@@ -1989,6 +1989,7 @@ PetsTab:AddSwitch("Buy Aura", function(bool)
     end
 end)
 
+
 local StatsTab = window:AddTab("Stats")
 
 StatsTab:AddLabel(emojiMap["Time"] .. " Time:").TextSize = 22
