@@ -2058,7 +2058,7 @@ while true do
     wait(0.1)
 end
 
-local Calculadora = window:AddTab("Calculadora 2", Color3.fromRGB(200, 100, 100))
+local Calculadora = window:AddTab("Calculadora 2")
 
 local baseStrength = 0
 local resultadoLabelsDamage = {}
