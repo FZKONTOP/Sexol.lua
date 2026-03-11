@@ -2442,7 +2442,7 @@ end)
 
 
 
-local FarmingTab = window:AddTab("Fast Farm")
+local REPTab = window:AddTab("Fast Farm")
 
 local strengthStat = leaderstats:WaitForChild("Strength")
 local durabilityStat = player:WaitForChild("Durability")
@@ -2465,26 +2465,26 @@ local function formatNumber(number)
     end
 end
 
-FarmingTab:AddLabel("Time:").TextSize = 20
-local stopwatchLabel = FarmingTab:AddLabel("0d 0h 0m 0s - Fast Rep Inactive")
+REPTab:AddLabel("Time:").TextSize = 20
+local stopwatchLabel = REPTab:AddLabel("0d 0h 0m 0s - Fast Rep Inactive")
 stopwatchLabel.TextSize = 17
 stopwatchLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
 
-local projectedStrengthLabel = FarmingTab:AddLabel("Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
+local projectedStrengthLabel = REPTab:AddLabel("Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
 projectedStrengthLabel.TextSize = 17
-local projectedDurabilityLabel = FarmingTab:AddLabel("Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
+local projectedDurabilityLabel = REPTab:AddLabel("Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
 projectedDurabilityLabel.TextSize = 17
-local averageStrengthLabel = FarmingTab:AddLabel("Average Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
+local averageStrengthLabel = REPTab:AddLabel("Average Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
 averageStrengthLabel.TextSize = 17
-local averageDurabilityLabel = FarmingTab:AddLabel("Average Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
+local averageDurabilityLabel = REPTab:AddLabel("Average Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
 averageDurabilityLabel.TextSize = 17
 
 FarmingTab:AddLabel("").TextSize = 10
-local statsLabel = FarmingTab:AddLabel("Stats:")
+local statsLabel = REPTab:AddLabel("Stats:")
 statsLabel.TextSize = 20
-local strengthLabel = FarmingTab:AddLabel("Strength: 0 | Gained: 0")
+local strengthLabel = REPTab:AddLabel("Strength: 0 | Gained: 0")
 strengthLabel.TextSize = 17
-local durabilityLabel = FarmingTab:AddLabel("Durability: 0 | Gained: 0")
+local durabilityLabel = REPTab:AddLabel("Durability: 0 | Gained: 0")
 durabilityLabel.TextSize = 17
 
 local startTime = 0
@@ -2593,8 +2593,8 @@ task.spawn(function()
     end
 end)
 
-FarmingTab:AddLabel("")
-FarmingTab:AddLabel("Fast Farm (Recommended Speed: 20)").TextSize = 20
+REPTab:AddLabel("")
+REPTab:AddLabel("Fast Farm (Recommended Speed: 20)").TextSize = 20
 
 local repsPerTick = 1
 
@@ -2604,7 +2604,7 @@ local function getPing()
     return pingStat and pingStat:GetValue() or 0
 end
 
-FarmingTab:AddTextBox("Rep Speed", function(value)
+REPTab:AddTextBox("Rep Speed", function(value)
     local num = tonumber(value)
     if num and num > 0 then
         repsPerTick = math.floor(num)
@@ -2628,7 +2628,7 @@ local function fastRepLoop()
     end
 end
 
-FarmingTab:AddSwitch("Fast Rep", function(state)
+REPTab:AddSwitch("Fast Rep", function(state)
     if state and not runFastRep then
         runFastRep = true
         task.spawn(fastRepLoop)
@@ -2642,7 +2642,7 @@ end)
 
 FastRebTab:AddLabel("")
 
-FarmingTab:AddLabel("Misc:").TextSize = 20
+REPTab:AddLabel("Misc:").TextSize = 20
 
 local function unequipPets()
     for _, folder in pairs(Player.petsFolder:GetChildren()) do
@@ -2685,7 +2685,7 @@ task.spawn(function()
     end
 end)
 
-local switch = FarmingTab:AddSwitch("Auto Egg", function(state)
+local switch = REPTab:AddSwitch("Auto Egg", function(state)
     running = state
     if state then
         activateProteinEgg()
@@ -2713,7 +2713,7 @@ task.spawn(function()
     end
 end)
 
-local switch = FarmingTab:AddSwitch("Auto Shake", function(state)
+local switch = REPTab:AddSwitch("Auto Shake", function(state)
     running = state
     if state then
         activateShake()
@@ -2721,7 +2721,7 @@ local switch = FarmingTab:AddSwitch("Auto Shake", function(state)
 end)
 switch:Set(false)
 
-local spinwheelSwitch = FarmingTab:AddSwitch("Spin Fortune Wheel", function(bool)
+local spinwheelSwitch = REPTab:AddSwitch("Spin Fortune Wheel", function(bool)
     _G.AutoSpinWheel = bool
     
     if bool then
@@ -2733,7 +2733,7 @@ local spinwheelSwitch = FarmingTab:AddSwitch("Spin Fortune Wheel", function(bool
     end
 end)
 
-FarmingTab:AddButton("Jungle Squat",function()
+REPTab:AddButton("Jungle Squat",function()
     local player = game.Players.LocalPlayer
     local char = player.Character or Player.CharacterAdded:wait()
     local hrp = char:WaitForChild("HumanoidRootPart")
@@ -2744,7 +2744,7 @@ FarmingTab:AddButton("Jungle Squat",function()
     VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.E, false, game)
 end)
 
-FarmingTab:AddButton("Anti Lag", function()
+REPTab:AddButton("Anti Lag", function()
     local player = game.Players.LocalPlayer
     local playerGui = player:WaitForChild("PlayerGui")
     local lighting = game:GetService("Lighting")
@@ -2817,7 +2817,7 @@ FarmingTab:AddButton("Anti Lag", function()
     darkenSky()
 end)
 
-FarmingTab:AddButton("Equip Swift Samurai", function()
+REPTab:AddButton("Equip Swift Samurai", function()
     unequipPets()
     equipPetsByName("Swift Samurai")
 end)
