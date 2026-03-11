@@ -72,43 +72,9 @@ ReplicatedStorage.ChildAdded:Connect(function(child)
     end
 end)
 
+
 local MainTab = window:AddTab("Main")
-local KillingTab = window:AddTab("Killing")
-local SpecsTab = window:AddTab("Specs")
-local FarmingTab = window:AddTab("Farming")
-local InventoryTab = window:AddTab("Inventory")
-local PetsTab = window:AddTab("Pet Shop")
-local TeleportTab = window:AddTab("Teleports")
-local StatsTab = window:AddTab("Stats")
-local infoTab = window:AddTab("Info")
-KillingTab:Show()
 
-infoTab:AddLabel("Made by Henne ♥️").TextSize = 20
-infoTab:AddLabel("Official Discord: discord.gg/silencev1")
-infoTab:AddButton("Copy Discord Invite", function()
-    local link = "https://discord.gg/9eFf93Kg8D"
-    if setclipboard then
-        setclipboard(link)
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Link Copied!";
-            Text = "You can continue to Discord now.";
-            Duration = 3;
-        })
-    else
-        game.StarterGui:SetCore("SendNotification", {
-            Title = "Error!";
-            Text = "Not Supported.";
-            Duration = 3;
-        })
-    end
-end)
-
-infoTab:AddLabel("")
-local wLabel = infoTab:AddLabel("VERSION//2.0.0")
-wLabel.TextSize = 30
-wLabel.Font = Enum.Font.Arcade
-
-MainTab:AddLabel("Settings:").TextSize = 22
 
 local changeSpeedSizeRemote = ReplicatedStorage.rEvents.changeSpeedSizeRemote
 
