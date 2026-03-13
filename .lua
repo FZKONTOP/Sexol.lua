@@ -2038,7 +2038,24 @@ for _, info in ipairs(stats) do
     statLabels[info.name] = StatsTab:AddLabel("")
     statLabels[info.name].TextSize = 20
 end
-
+while true do
+    for _, info in ipairs(stats) do
+        local currentValue = info.stat.Value
+        local gained = currentValue - initialValues[info.name]
+        
+        local displayText = string.format(
+            "%s: %s (%s) | Gained: %s (%s)",
+            info.name,
+            formatNumber(currentValue),
+            formatWithCommas(currentValue),
+            formatNumber(gained),
+            formatWithCommas(gained)
+        )
+        
+        statLabels[info.name].Text = displayText
+    end
+    wait(0.9)
+end
 
 local Calculadora = window:AddTab("Calculadora 2")
 
