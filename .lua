@@ -2427,25 +2427,7 @@ task.spawn(function()
     end
 end)
 
-local autoshakeSwitch = FastRebTab:AddSwitch("Auto Shake", function(state)
-    running = state
-    if state then
-        activateShake()
-    end
-end)
-autoshakeSwitch:Set(false)
 
-local spinwheelSwitch = FastRebTab:AddSwitch("Spin Fortune Wheel", function(bool)
-    _G.AutoSpinWheel = bool
-    
-    if bool then
-        spawn(function()
-            while _G.AutoSpinWheel and wait(1) do
-                game:GetService("ReplicatedStorage").rEvents.openFortuneWheelRemote:InvokeServer("openFortuneWheel", game:GetService("ReplicatedStorage").fortuneWheelChances["Fortune Wheel"])
-            end
-        end)
-    end
-end)
 
 FastRebTab:AddButton("Jungle Lift",function()
     local player = game.Players.LocalPlayer
@@ -2463,7 +2445,7 @@ end)
 
 
 
-local FarmingTab = window:AddTab("Fast Farm")
+local FarmingopTab = window:AddTab("op Farm")
 
 local strengthStat = leaderstats:WaitForChild("Strength")
 local durabilityStat = player:WaitForChild("Durability")
@@ -2486,26 +2468,26 @@ local function formatNumber(number)
     end
 end
 
-FarmingTab:AddLabel("Time:").TextSize = 20
-local stopwatchLabel = FarmingTab:AddLabel("0d 0h 0m 0s - Fast Rep Inactive")
+FarmingopTab:AddLabel("Time:").TextSize = 20
+local stopwatchLabel = FarmingopTab:AddLabel("0d 0h 0m 0s - Fast Rep Inactive")
 stopwatchLabel.TextSize = 17
 stopwatchLabel.TextColor3 = Color3.fromRGB(255, 50, 50)
 
-local projectedStrengthLabel = FarmingTab:AddLabel("Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
+local projectedStrengthLabel = FarmingopTab:AddLabel("Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
 projectedStrengthLabel.TextSize = 17
-local projectedDurabilityLabel = FarmingTab:AddLabel("Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
+local projectedDurabilityLabel = FarmingopTab:AddLabel("Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
 projectedDurabilityLabel.TextSize = 17
-local averageStrengthLabel = FarmingTab:AddLabel("Average Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
+local averageStrengthLabel = FarmingopTab:AddLabel("Average Strength Pace: 0 /Hour | 0 /Day | 0 /Week")
 averageStrengthLabel.TextSize = 17
-local averageDurabilityLabel = FarmingTab:AddLabel("Average Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
+local averageDurabilityLabel = FarmingopTab:AddLabel("Average Durability Pace: 0 /Hour | 0 /Day | 0 /Week")
 averageDurabilityLabel.TextSize = 17
 
-FarmingTab:AddLabel("").TextSize = 10
-local statsLabel = FarmingTab:AddLabel("Stats:")
+FarmingopTab:AddLabel("").TextSize = 10
+local statsLabel = FarmingopTab:AddLabel("Stats:")
 statsLabel.TextSize = 20
-local strengthLabel = FarmingTab:AddLabel("Strength: 0 | Gained: 0")
+local strengthLabel = FarmingopTab:AddLabel("Strength: 0 | Gained: 0")
 strengthLabel.TextSize = 17
-local durabilityLabel = FarmingTab:AddLabel("Durability: 0 | Gained: 0")
+local durabilityLabel = FarmingopTab:AddLabel("Durability: 0 | Gained: 0")
 durabilityLabel.TextSize = 17
 
 local startTime = 0
@@ -2614,8 +2596,8 @@ task.spawn(function()
     end
 end)
 
-FarmingTab:AddLabel("")
-FarmingTab:AddLabel("Fast Farm (Recommended Speed: 20)").TextSize = 20
+FarmingopTab:AddLabel("")
+FarmingopTab:AddLabel("Fast Farm (Recommended Speed: 20)").TextSize = 20
 
 local repsPerTick = 1
 
@@ -2625,7 +2607,7 @@ local function getPing()
     return pingStat and pingStat:GetValue() or 0
 end
 
-FarmingTab:AddTextBox("Rep Speed", function(value)
+FarmingopTab:AddTextBox("Rep Speed", function(value)
     local num = tonumber(value)
     if num and num > 0 then
         repsPerTick = math.floor(num)
@@ -2649,7 +2631,7 @@ local function fastRepLoop()
     end
 end
 
-FarmingTab:AddSwitch("Fast Rep", function(state)
+FarmingopTab:AddSwitch("Fast Rep", function(state)
     if state and not runFastRep then
         runFastRep = true
         task.spawn(fastRepLoop)
@@ -2663,7 +2645,7 @@ end)
 
 FastRebTab:AddLabel("")
 
-FarmingTab:AddLabel("Misc:").TextSize = 20
+FarmingopTab:AddLabel("Misc:").TextSize = 20
 
 local function unequipPets()
     for _, folder in pairs(Player.petsFolder:GetChildren()) do
